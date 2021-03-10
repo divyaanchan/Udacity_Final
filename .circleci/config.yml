@@ -47,10 +47,9 @@ jobs:
 
     steps:
       - checkout
-
       - setup_remote_docker:
-        version: 19.03.13
-        docker_layer_caching: true
+          version: 19.03.13
+          docker_layer_caching: true
 
       # build and push Docker image
       - run: |
@@ -64,5 +63,5 @@ workflows:
   default:
     jobs:
       - lint_Dockerfile
-      - Build_DockerApp
-           requires: [lint_Dockerfile]
+      - Build_DockerApp:
+         requires: [lint_Dockerfile]
