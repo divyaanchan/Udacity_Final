@@ -15,7 +15,7 @@ jobs:
       - checkout
       # Download and cache dependencies
       - restore_cache:
-          keys: [lint-Dockerfile]
+          keys: [Dockerfile-lint]
             
       - run:
           name: install dependencies
@@ -29,14 +29,40 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          key: lint-Dockerfile
+          key: Dockerfile-lint
       - run:
           name: run lint
           command: |
             . venv/bin/activate
             make lint
+
+  # Build Docker Application
+  Build_DockerApp:
+    docker:
+      # Use the same Docker base as the project
+      - image: circleci/golang:1.15
+        auth:
+             username: $DOCKER_USER
+             password: $DOCKER_PASS
+
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+        version: 19.03.13
+        docker_layer_caching: true
+
+      # build and push Docker image
+      - run: |
+          TAG=DIVYA.$CIRCLE_BUILD_NUM
+          docker build -t $TAG .
+          docker image ls
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push $TAG
             
 workflows:
   default:
     jobs:
       - lint_Dockerfile
+      - Build_DockerApp
+           requires: [lint_Dockerfile]
