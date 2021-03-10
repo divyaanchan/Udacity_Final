@@ -54,19 +54,19 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-          TAG=divya.$CIRCLE_BUILD_NUM
-          docker build -t $TAG .
+            TAG=divya.$CIRCLE_BUILD_NUM
+            docker build -t $TAG .
       - run:
           name: List Docker Image
           command: |
-          docker image ls
-      -run:
+            docker image ls
+      - run:
           name: Push Docker image into Docker Hub
           command: |
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-          dockerpath=anchandivya/$TAG
-          docker tag $TAG $dockerpath
-          docker push $dockerpath
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            dockerpath=anchandivya/$TAG
+            docker tag $TAG $dockerpath
+            docker push $dockerpath
             
 workflows:
   default:
