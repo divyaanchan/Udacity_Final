@@ -52,7 +52,7 @@ jobs:
 
       # build and push Docker image
       - run: |
-          TAG=DIVYA.$CIRCLE_BUILD_NUM
+          TAG=divya.$CIRCLE_BUILD_NUM
           docker build -t $TAG .
           docker image ls
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
