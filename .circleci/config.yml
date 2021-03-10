@@ -64,10 +64,7 @@ jobs:
           name: Push Docker image into Docker Hub
           command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-<<<<<<< HEAD
             TAG=divya.$CIRCLE_BUILD_NUM
-=======
->>>>>>> ad9dbf137cdf71a7a1eb5dad4c226cb5d9ee6961
             dockerpath=anchandivya/$TAG
             docker tag $TAG $dockerpath
             docker push $dockerpath
