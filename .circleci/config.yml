@@ -51,13 +51,18 @@ jobs:
           version: 19.03.13
 
       # build and push Docker image
-      - run: |
+      - run:
+          name: Build Docker Image
+          command: |
           TAG=divya.$CIRCLE_BUILD_NUM
-          echo "\nBuilding docker image"
           docker build -t $TAG .
-          echo "\nList the docker image"
+      - run:
+          name: List Docker Image
+          command: |
           docker image ls
-          echo  "\n Push the docker image into docker hub"
+      -run:
+          name: Push Docker image into Docker Hub
+          command: |
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           dockerpath=anchandivya/$TAG
           docker tag $TAG $dockerpath
