@@ -47,22 +47,25 @@ jobs:
 
     steps:
       - checkout
-
       - setup_remote_docker:
-        version: 19.03.13
-        docker_layer_caching: true
+          version: 19.03.13
 
       # build and push Docker image
       - run: |
-          TAG=DIVYA.$CIRCLE_BUILD_NUM
+          TAG=divya.$CIRCLE_BUILD_NUM
+          echo "\nBuilding docker image"
           docker build -t $TAG .
+          echo "\nList the docker image"
           docker image ls
+          echo  "\n Push the docker image into docker hub"
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-          docker push $TAG
+          dockerpath=anchandivya/$TAG
+          docker tag $TAG $dockerpath
+          docker push $dockerpath
             
 workflows:
   default:
     jobs:
       - lint_Dockerfile
-      - Build_DockerApp
-           requires: [lint_Dockerfile]
+      - Build_DockerApp:
+         requires: [lint_Dockerfile]
