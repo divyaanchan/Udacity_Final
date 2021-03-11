@@ -130,5 +130,5 @@ workflows:
        - lint_Dockerfile
        - Build_DockerApp:
             requires: [lint_Dockerfile]
-        - Deploy_AWS_Kube:
+       - Deploy_AWS_Kube:
             requires: [Build_DockerApp]
