@@ -102,8 +102,14 @@ jobs:
           name: Build AWS Kubernetes cluster
           command: |
             export TERM=xterm
-            chmod 755 create_aws_kube_infra.sh
-            ./create_aws_kube_infra.sh
+            count=`aws cloudformation list-exports|grep -i eksctl-capstone-divya-cluster|wc -l`
+            if [[ $count -gt 0 ]]
+              then 
+                    echo "Skipping Cluster creation .. Infrastructure Exists"
+              else
+                    echo "Creatiing AWS Kubernetes cluster"
+                    eksctl create cluster --name capstone-divya --version 1.19 --region $AWS_DEFAULT_REGION --nodegroup-name capstone-divya  --nodes-min 1 --nodes-max 4 --managed
+            fi
       
       # - run:
       #     name: update kube cluster
