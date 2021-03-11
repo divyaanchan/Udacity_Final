@@ -101,8 +101,9 @@ jobs:
       - run:
           name: Build AWS Kubernetes cluster
           command: |
-            export TERM=xterm
-            aws cloudformation list-exports|grep -i eksctl-capstone-divya-cluster|wc -l
+            aws  --version
+            cat  ~/.aws/config
+            # count=`aws cloudformation list-exports|grep -i eksctl-capstone-divya-cluster|wc -l`
             # if [[ $count -gt 0 ]]
             #   then 
             #         echo "Skipping Cluster creation .. Infrastructure Exists"
