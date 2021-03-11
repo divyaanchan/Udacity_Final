@@ -123,18 +123,12 @@ jobs:
              kubectl rollout restart deployment/capstone-divya
              kubectl describe svc capstone-divya
 
-      # - run:
-      #     name: Test the web application
-      #     command: |
-      #       chmod 755 WebCheck.sh
-      #       ./WebCheck.sh
-
-
+     
 workflows:
   default:
     jobs:
-      # - lint_Dockerfile
-      # - Build_DockerApp:
-      #    requires: [lint_Dockerfile]
-        - Deploy_AWS_Kube
-      #    requires: [Build_DockerApp]
+       - lint_Dockerfile
+       - Build_DockerApp:
+            requires: [lint_Dockerfile]
+        - Deploy_AWS_Kube:
+            requires: [Build_DockerApp]
