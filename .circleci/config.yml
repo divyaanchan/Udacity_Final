@@ -101,18 +101,20 @@ jobs:
       - run:
           name: Build AWS Kubernetes cluster
           command: |
+            export TERM=xterm
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set default.region $AWS_DEFAULT_REGION
-            count=`aws cloudformation list-exports|grep -i eksctl-capstone-divya-cluster|wc -l`
-            if [[ $count -gt 0 ]]
-              then 
-                    echo "Skipping Cluster creation .. Infrastructure Exists"
-              else
-                    echo "Creatiing AWS Kubernetes cluster"
-                    #which eksctl
-                    #eksctl create cluster --name capstone-divya --version 1.19 --region $AWS_DEFAULT_REGION --nodegroup-name linux-nodes --nodes 3  --nodes-min 1 --nodes-max 4 --managed
-            fi
+            aws cloudformation list-exports|egrep -i "eksctl-capstone-divya-cluster"|wc -l
+            #echo  $count
+            # if [[ $count -gt 0 ]]
+            #   then 
+            #         echo "Skipping Cluster creation .. Infrastructure Exists"
+            #   else
+            #         echo "Creatiing AWS Kubernetes cluster"
+            #         #which eksctl
+            #         #eksctl create cluster --name capstone-divya --version 1.19 --region $AWS_DEFAULT_REGION --nodegroup-name linux-nodes --nodes 3  --nodes-min 1 --nodes-max 4 --managed
+            # fi
       
       # - run:
       #     name: update kube cluster
