@@ -109,18 +109,18 @@ jobs:
             chmod 755 create_aws_kube_infra.sh
             ./create_aws_kube_infra.sh
       
-      # - run:
-      #     name: update kube cluster
-      #     command: |
-      #       # update cluster with yaml - Rolling Deployment
-      #       aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name capstone-divya
-      #       kubectl apply -f deployment.yml
-      #       kubectl get nodes
-      #       kubectl get deployment
-      #       kubectl get pod -o wide
-      #       kubectl apply -f services.yml
-      #       kubectl get services
-      #       #kubectl rollout restart deployment/capstone-divya
+      - run:
+          name: update kube cluster
+          command: |
+            # update cluster with yaml - Rolling Deployment
+            aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name capstone-divya
+            kubectl apply -f deployment.yml
+            kubectl get nodes
+            kubectl get deployment
+            kubectl get pod -o wide
+            kubectl apply -f services.yml
+            kubectl get services
+            #kubectl rollout restart deployment/capstone-divya
 
       # - run:
       #     name: Test the web application
