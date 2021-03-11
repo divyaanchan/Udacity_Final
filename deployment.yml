@@ -1,0 +1,26 @@
+# Create web hosts based on docker image
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstone-divya
+spec:
+  selector:
+    matchLabels:
+      app: capstone-divya
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: capstone-divya
+    spec:
+      containers:
+      - name: capstone-divya
+        image: anchandivya/divya.17
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
