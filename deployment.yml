@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: capstone-divya
-        image: anchandivya/divya.17
+        image: anchandivya/divya.18
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            TAG=divya.$CIRCLE_BUILD_NUM
+            TAG=divya.18
             docker build -t $TAG .
       - run:
           name: List Docker Image
@@ -64,7 +64,7 @@ jobs:
           name: Push Docker image into Docker Hub
           command: |
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-            TAG=divya.$CIRCLE_BUILD_NUM
+            TAG=divya.18
             dockerpath=anchandivya/$TAG
             docker tag $TAG $dockerpath
             docker push $dockerpath
@@ -130,5 +130,5 @@ workflows:
        - lint_Dockerfile
        - Build_DockerApp:
             requires: [lint_Dockerfile]
-        - Deploy_AWS_Kube:
+       - Deploy_AWS_Kube:
             requires: [Build_DockerApp]
