@@ -105,7 +105,7 @@ jobs:
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set default.region $AWS_DEFAULT_REGION
-            aws cloudformation list-exports|egrep -i "eksctl-capstone-divya-cluster"|wc -l
+            nohup aws cloudformation list-exports > list.txt
             #echo  $count
             # if [[ $count -gt 0 ]]
             #   then 
