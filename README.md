@@ -1,15 +1,20 @@
 # Udacity_Final
 Description:The  project deploys  index.html  using RollingUpdate 
 
-Technologies Used:
+*********************************************************************************************************************
 
-Docker
+Technologies Used:
+Docker 
+
 Kubernetes
+
 CircleCI
+
 GitHub
+
 AWS
 
-
+*********************************************************************************************************************
 Steps:
 1)Test the  code using linting
 
@@ -28,6 +33,8 @@ Steps:
 8)Using RollingUpdate method  deployed  this  app  again 
 
 9)the entire  process  is run via CIRCLECI and  code is  stored in  github 
+
+*********************************************************************************************************************
 
 URLS -- urls.txt  
 contains  github and   website url
